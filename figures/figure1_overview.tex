@@ -1,0 +1,40 @@
+% Conceptual figure only; this file contains no empirical evidence.
+% Required libraries: arrows.meta, positioning
+\begin{tikzpicture}[
+  node distance=11mm and 9mm,
+  block/.style={
+    draw,
+    rounded corners=2pt,
+    align=center,
+    minimum height=13mm,
+    minimum width=29mm,
+    fill=blue!4
+  },
+  evidence/.style={
+    draw,
+    dashed,
+    rounded corners=2pt,
+    align=center,
+    minimum height=10mm,
+    fill=gray!6,
+    font=\small
+  },
+  flow/.style={-{Latex[length=2.2mm]}, thick},
+  support/.style={-{Latex[length=1.8mm]}, dashed}
+]
+  \node[block] (state) {Training\\state};
+  \node[block, right=of state] (value) {Intrinsic valuation\\$Q_j(\eta)\to V_j^{\mathrm{cont}}$};
+  \node[block, right=of value] (actions) {Finite actions\\$s_0,\ s_1$};
+  \node[block, right=of actions] (transfer) {Pairwise transfer\\$|\Delta_{\mathrm{real}}-\Delta_Q|\leq\Xi_{01}$};
+  \node[block, right=of transfer] (decision) {Certified decision\\$|\Delta_Q|>\Xi_{01}$};
+
+  \draw[flow] (state) -- (value);
+  \draw[flow] (value) -- (actions);
+  \draw[flow] (actions) -- (transfer);
+  \draw[flow] (transfer) -- (decision);
+
+  \node[evidence, below=of value] (synthetic) {exact-model\\synthetic calibration};
+  \node[evidence, below=of transfer] (neural) {preregistered\\neural study};
+  \draw[support] (synthetic) -- (value);
+  \draw[support] (neural) -- (transfer);
+\end{tikzpicture}
