@@ -1,0 +1,19 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+build/
+dist/
+*.egg-info/
+.DS_Store
+
+# Generated analyses belong in new, namespaced directories and are not source.
+results/
+outputs/
+
+# Frozen evidence is never committed to this collaboration repository.
+frozen_artifacts/
+gate3_artifacts/
